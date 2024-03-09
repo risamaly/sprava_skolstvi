@@ -1,0 +1,1 @@
+# sprava_skolstvi
