@@ -1,0 +1,34 @@
+{% extends "base/user_base.html" %}
+{% block title %}Správa Školství{% endblock %}
+{% block css_link %}/static/boss.css{% endblock %}
+{% block content %}
+<main class="container">
+    <h1>Škola: {{ school_name }}</h1>
+    <input type="text" id="search-input" class="form-control" placeholder="Vyhledat zaměstnance..." autocomplete="off">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Jméno</th>
+                <th>Příjmení</th>
+                <th>Email</th>
+                <th>BCN</th>
+            </tr>
+        </thead>
+        <tbody id="employee-results">
+            {% for employee in employees %}
+                <tr>
+                    <td>{{ employee[1] }}</td>
+                    <td>{{ employee[2] }}</td>
+                    <td>{{ employee[3] }}</td>
+                    <td>{{ employee[4] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+<footer></footer>
+{% endblock %}
+
+{% block script %}
+/static/boss.js
+{% endblock %}

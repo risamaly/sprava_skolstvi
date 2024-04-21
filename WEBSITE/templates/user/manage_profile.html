@@ -1,0 +1,33 @@
+{% extends "BASE/base.html" %}
+{% block title %}Upravit Profil{% endblock %}
+{% block css_link %}/static/manage_profile.css{% endblock %}
+{% block content %}
+<div class="profile-container">
+    <div class="profile-header">
+        <div class="image-container">
+            <img src="{{ url_for('static', filename=user.profile_pic) if user.profile_pic else url_for('static', filename='images/default_profile_pic.png') }}" alt="Profilová fotografie" class="profile-picture">
+            <a href="{{ url_for('user_routes.change_my_informations') }}" class="edit-icon" title="Upravit profilový obrázek">✏️</a>
+        </div>
+    </div>
+
+    <div class="personal-info">
+        <h2>Osobní informace</h2>
+        <p>SID: {{ user.sid }}</p> 
+        <p>Titul před jménem: {{ user.title_before_name }}</p>
+        <p>Jméno: {{ user.first_name }}</p>
+        <p>Příjmení: {{ user.last_name }}</p>
+        <p>Titul za jménem: {{ user.title_after_name }}</p>
+        <p>Ročník narození (BCN): {{ user.bcn }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>Telefon: {{ user.phone_number }}</p>
+        <p>Adresa: {{ user.adress }}</p>
+    </div>
+    <div class="school-info">
+        <h2>Informace o škole</h2>
+        <p>Škola: {{ user.school_name }}</p>
+        <p>Role: {{ user.role }}</p>
+        <p>Školní email: {{ user.school_email }}</p>
+        <p>Školní telefon: {{ user.school_phone_number }}</p>
+    </div>
+</div>
+{% endblock %}

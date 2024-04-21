@@ -1,0 +1,19 @@
+{% extends "base/user_base.html" %}
+{% block title %}Správa Školství{% endblock %}
+{% block css_link %}/static/deputy.css{% endblock %}
+{% block content %}
+<main class="main-content">
+    <h1></h1>
+    <div id="container" class="shadow p-3 mb-5 bg-body-tertiary rounded">
+        <div id="content">
+            <h1>Funkce</h1>
+            <button class="btn btn-primary" type="button" onclick="window.location.href='admin/utilities/add_use'">Přidat učitele</button>
+            <button class="btn btn-primary" type="button" onclick="window.location.href='admin/utilities/add_ur'">Vyhledat školu</button>
+            <button class="btn btn-primary" type="button" onclick="window.location.href='admin/utilities/add_ser'">Vyhledat studenta</button>
+            <button class="btn btn-primary" type="button" onclick="window.location.href='admin/utilities/adduser'">Vyhledat uživatele</button>
+        </div>
+    </div>
+</main>
+<footer>
+</footer>
+{% endblock %}

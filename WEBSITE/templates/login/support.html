@@ -1,0 +1,48 @@
+{% extends "base/base.html" %}
+
+{% block title %}Správa Školství - Podpora{% endblock %}
+
+{% block css_link %}/static/support.css{% endblock %}
+
+{% block content %}
+<div class="request-container">
+    <h1>Podpora</h1>
+    
+    <form action="{{ url_for('routes.support') }}" method="post">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div>
+            {% for category, message in messages %}
+                <div class="flash-message {{ category }}">{{ message }}</div>
+            {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+
+        <div class="form-section">
+            <h2>Podrobnosti Žádosti</h2>
+            <input type="text" placeholder="Předmět" name="request_subject" required value="{{ request.form.get('request_subject', '') }}">
+            <textarea name="request_description" placeholder="Popište svůj problém" required rows="5" style="width: 100%;">{{ request.form.get('request_description', '') }}</textarea>
+        </div>
+
+        <div class="form-section" style="text-align: center;">
+            
+            <input class="form-label" style="padding: 5px; width: 6cm;"  type="password" placeholder="Zadejte své heslo" name="password" required>
+        </div>
+
+        <button type="submit" class="submit-btn">Odeslat Žádost</button>
+        
+    </form>
+</div>
+{% endblock %}
+<script>
+    document.querySelector('.submit-btn').addEventListener('click', function(event) {
+        var password = prompt("Opravdu odeslat? Zadejte své heslo pro potvrzení.");
+        if (password) {
+            document.querySelector('input[name="password"]').value = password;
+        } else {
+            event.preventDefault();
+        }
+    });
+</script>
+

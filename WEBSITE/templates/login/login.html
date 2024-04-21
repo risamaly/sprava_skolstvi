@@ -1,0 +1,27 @@
+{% extends "BASE/base.html" %}
+{% block title %}Přihlášení{% endblock%}
+{% block css_link %}/static/login.css{% endblock %}
+{% block content %}
+
+<form method="POST">
+    <div id="login_form" class="shadow p-3 mb-5 bg-body-tertiary rounded">
+        <div id="content">
+            <h1>Přihlášení</h1>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p style="color: red;">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <input class="form-label" type="text" placeholder="SID" id="sid" name="sid" title="Zadejte Vaše přiřazené školské identifikační číslo" value="{{ request.form.sid if request.form.sid }}">
+            <input class="form-label" type="password" placeholder="Heslo" id="password" name="password" title="Zadejte Vaše heslo">
+            <button type="submit" class="btn btn-primary">Přihlásit se</button>
+            <a id="lost_pass" onclick="window.location.href='lost_password'">Zapoměli jste heslo?</a>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
+    
+   

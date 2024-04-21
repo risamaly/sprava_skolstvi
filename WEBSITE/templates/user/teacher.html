@@ -1,0 +1,16 @@
+{% extends "base/user_base.html" %}
+{% block title %}Správa Třídy{% endblock %}
+{% block css_link %}/static/teacher.css{% endblock %}
+{% block content %}
+<div id="container1" class="container mt-4">
+    <h2>Třída : {{ class_info[1] }} </h2> 
+    <input type="text" id="search-input" class="form-control" placeholder="Filtrovat studenty..." autocomplete="off">
+    <div id="student-results" class="mt-3">
+        {% for student in students %}
+        <p>{{ student.first_name }} {{ student.last_name }} - {{ student.student_email }}</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}/static/teacher.js{% endblock %}

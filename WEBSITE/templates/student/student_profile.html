@@ -1,0 +1,29 @@
+{% extends "BASE/base.html" %}
+{% block title %}Profil Studenta{% endblock %}
+{% block css_link %}/static/manage_profile.css{% endblock %}
+{% block content %}
+<div class="profile-container">
+    <div class="profile-header">
+        <div class="image-container">
+            <img src="{{ url_for('static', filename=student.user_profile_pic) if student.user_profile_pic else url_for('static', filename='images/default_student_pic.png') }}" alt="Profilová fotografie" class="profile-picture">
+        </div>
+    </div>
+
+    <div class="personal-info">
+        <h2>Osobní informace</h2>
+        <p>Jméno: {{ student.first_name }}</p>
+        <p>Příjmení: {{ student.last_name }}</p>
+        <p>BCN: {{ student.bcn }}</p>
+        <p>Email: {{ student.student_email }}</p>
+        <p>Telefon: {{ student.student_phone_number }}</p>
+        <p>Adresa: {{ student.student_adress }}</p>
+    </div>
+    <div class="parent-info">
+        <h2>Informace o rodičích</h2>
+        <p>Email rodiče: {{ student.parent_email }}</p>
+        <p>Telefon rodiče: {{ student.parent_phone_number }}</p>
+        <p>Adresa rodiče: {{ student.parent_adress }}</p>
+    </div>
+
+</div>
+{% endblock %}

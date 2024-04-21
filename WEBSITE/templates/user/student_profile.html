@@ -1,0 +1,29 @@
+{% extends "BASE/base.html" %}
+{% block title %}Profil Studenta{% endblock %}
+{% block css_link %}/static/change_my_informations.css{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="profile-header">
+        <img src="{{ student.user_profile_pic }}" alt="Profilová fotografie studenta" class="profile-picture img-fluid rounded-circle">
+        <h1>{{ student.first_name }} {{ student.last_name }}</h1>
+    </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">Základní informace</h2>
+            <p class="card-text"><strong>Školní email:</strong> {{ student.student_email }}</p>
+            <p class="card-text"><strong>Email rodiče:</strong> {{ student.parent_email }}</p>
+            <p class="card-text"><strong>Škola:</strong> {{ school_name }}</p>
+            <p class="card-text"><strong>Student ID:</strong> {{ student.student_id }}</p>
+        </div>
+        <a id="hrefik" href="/student_profile/more_info" class="d-block mb-2 text-decoration-none btn-link">Více...</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+.container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#search-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#employee-results {
+    margin-top: 20px;
+}
+
+#employee-results table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#employee-results th, 
+#employee-results td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+#employee-results tr:hover {
+    background-color: #f1f1f1;
+}
+
+

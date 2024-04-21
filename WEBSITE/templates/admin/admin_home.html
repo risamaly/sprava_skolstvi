@@ -1,0 +1,18 @@
+{% extends "BASE/base.html" %}
+{% block title %}Admin{% endblock%}
+{% block css_link %}/static/admin_home.css{% endblock %}
+{% block content %}
+
+<main>
+
+    <div id="container" class="shadow p-3 mb-5 bg-body-tertiary rounded">
+        <div id="content">        
+            <h1>Adminské Oprávnění</h1>
+            <button class="btn btn-primary" type="button" onclick="window.location.href='admin/utilities/add_user'">Přidat Uživatele</button>
+            <button class="btn btn-primary" type="button" onclick="window.location.href='admin/manage_users'">Spravovat Uživatele</button>
+            
+        </div>
+    </div>
+    
+</main>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base/base.html" %}
+{% block title %}Správa Uživatelu{% endblock %}
+{% block css_link %}/static/manage_users.css{% endblock %}
+
+{% block content %}
+<div id="container1" class="container mt-4">
+    <h2>Odebrat nebo upravit uživatele</h2>
+    <input type="text" id="search-input" class="form-control" placeholder="Vyhledat uživatele..." autocomplete="off">
+    <div id="user-results" class="mt-3">
+
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}/static/manage_users.js{% endblock %}

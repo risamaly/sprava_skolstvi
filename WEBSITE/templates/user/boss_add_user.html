@@ -1,0 +1,41 @@
+{% extends "base/base.html" %}
+
+{% block title %}Správa Školství - Nový Uživatel{% endblock %}
+
+{% block css_link %}/static/boss_add_user.css{% endblock %}
+
+{% block content %}
+<div class="request-container">
+    <h1>Zadat o Nového Uživatele</h1>
+    <p>Vyplňte formulář pro zaslání žádosti administrátorovi.</p>
+    <form action="{{ url_for('user_routes.add_user') }}" method="post">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div>
+            {% for category, message in messages %}
+                <div class="flash-message {{ category }}">{{ message }}</div>
+            {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+        
+        <div class="form-section">
+            <h2>Údaje Uživatele</h2>
+            <input type="text" placeholder="Jméno" name="user_first_name" required value="{{ user_details.get('user_first_name', '') }}">
+            <input type="text" placeholder="Příjmení" name="user_last_name" required value="{{ user_details.get('user_last_name', '') }}">
+            <input type="email" placeholder="Email" id="user_email" name="user_email" required value="{{ user_details.get('user_email', '') }}">
+            <select name="user_role" required>
+                <option value="">Vyberte roli...</option>
+                
+                <option value="Zástupce ředitele" {% if user_details.get('user_role') == "Zástupce ředitele" %}selected{% endif %}>Zástupce ředitele</option>
+                <option value="Učitel/ka" {% if user_details.get('user_role') == "Učitel/ka" %}selected{% endif %}>Učitel/ka</option>
+            </select>
+            <input type="text" placeholder="BCN" id="BCN" name="BCN" required value="{{ user_details.get('BCN', '') }}">
+
+            
+        </div>
+        
+        <button type="submit" class="submit-btn">Odeslat Žádost</button>
+    </form>
+</div>
+{% endblock %}

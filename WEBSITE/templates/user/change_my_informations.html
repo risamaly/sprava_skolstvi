@@ -1,0 +1,81 @@
+{% extends "BASE/base.html" %}
+{% block title %}Upravit Informace{% endblock %}
+{% block css_link %}/static/change_my_informations.css{% endblock %}
+{% block content %}
+<div class="profile-container">
+    <div class="profile-header">
+        <img src="{{ user.user_profile_pic }}" alt="Profilová fotografie" class="profile-picture">
+        <h1>Osobní informace</h1>
+    </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <form action="{{ url_for('user_routes.update_information') }}" method="post" class="form-profile">
+        <label for="bcn">SID:</label>
+        <input type="text" name="user_sid" value="{{ user.sid }}" readonly>
+
+        <label for="title_before_name">Titul před jménem:</label>
+        <select id="title_before_name" name="title_before_name">
+            <option value="">Žádný</option>
+            <option value="Bc." {{ 'selected' if user.title_before_name == 'Bc.' }}>Bc.</option>
+            <option value="Ing." {{ 'selected' if user.title_before_name == 'Ing.' }}>Ing.</option>
+            <option value="MUDr." {{ 'selected' if user.title_before_name == 'MUDr.' }}>MUDr.</option>
+            <option value="Mgr." {{ 'selected' if user.title_before_name == 'Mgr.' }}>Mgr.</option>
+            <option value="PhDr." {{ 'selected' if user.title_before_name == 'PhDr.' }}>PhDr.</option>
+
+        </select>
+
+        <label for="first_name">Jméno:</label>
+        <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}" readonly>
+
+        <label for="last_name">Příjmení:</label>
+        <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}" readonly>
+
+        <label for="title_after_name">Titul za jménem:</label>
+        <select id="title_after_name" name="title_after_name">
+            <option value="">Žádný</option>
+            <option value="Ph.D." {{ 'selected' if user.title_after_name == 'Ph.D.' }}>Ph.D.</option>
+            <option value="CSc." {{ 'selected' if user.title_after_name == 'CSc.' }}>CSc.</option>
+            <option value="DiS." {{ 'selected' if user.title_after_name == 'DiS.' }}>DiS.</option>
+
+        </select>
+
+        <label for="bcn">Rodné Číslo (BCN):</label>
+        <input type="text" id="bcn" name="bcn" value="{{ user.bcn }}" readonly>
+
+        <label for="user_email">Email:</label>
+        <input type="email" id="user_email" name="user_email" value="{{ user.user_email }}">
+
+        <label for="user_phone_number">Telefon:</label>
+        <input type="tel" id="user_phone_number" name="user_phone_number" value="{{ user.user_phone_number }}">
+
+        <label for="user_adress">Adresa:</label>
+        <input type="text" id="user_adress" name="user_adress" value="{{ user.user_adress }}">
+
+        <label for="school_id">Škola:</label>
+        <input type="school_id" id="school_id" name="school_id" value="{{ user.school_id }}">
+
+        <label for="user_role">Role:</label>
+        <select id="user_role" name="user_role" disabled>
+            <option value="Ředitel/ka" {{ 'selected' if user.user_role == 'Ředitel/ka' }}>Ředitel/ka</option>
+            <option value="Zástupce ředitele" {{ 'selected' if user.user_role == 'Zástupce ředitele' }}>Zástupce ředitele</option>
+            <option value="Učitel/ka" {{ 'selected' if user.user_role == 'Učitel/ka' }}>Učitel/ka</option>
+            <option value="Admin" {{ 'selected' if user.user_role == 'Admin' }}>Admin</option>
+        </select>
+
+        <label for="user_school_email">Školní email:</label>
+        <input type="email" id="user_school_email" name="user_school_email" value="{{ user.user_school_email }}">
+
+        <label for="user_school_phone_number">Školní telefonní číslo:</label>
+        <input type="tel" id="user_school_phone_number" name="user_school_phone_number" value="{{ user.user_school_phone_number }}">
+
+        <button type="submit" class="btn btn-primary">Uložit změny</button>
+    </form>
+</div>
+{% endblock %}

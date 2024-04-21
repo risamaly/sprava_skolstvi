@@ -1,0 +1,14 @@
+{% extends "base/user_base.html" %}
+{% block title %}Vyhledat Studenta{% endblock %}
+{% block css_link %}/static/search_student.css{% endblock %}
+{% block content %}
+<div id="container1" class="container mt-4">
+    <h2>Seznam Škol</h2>
+    <input type="text" id="search-input" class="form-control" placeholder="Filtrovat školy..." autocomplete="off">
+    <div id="school-results" class="mt-3">
+
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}/static/search_school.js{% endblock %}
