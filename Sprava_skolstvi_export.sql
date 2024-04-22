@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `sprava_skolstvi_database` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `sprava_skolstvi_database` /*!40100 DEFAULT CHARACTER SET utf8mb4 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `sprava_skolstvi_database`;
 -- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
@@ -31,7 +31,7 @@ CREATE TABLE `class` (
   PRIMARY KEY (`class_id`),
   KEY `user_sid` (`user_sid`),
   CONSTRAINT `class_ibfk_1` FOREIGN KEY (`user_sid`) REFERENCES `employees` (`user_sid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +70,7 @@ CREATE TABLE `employees` (
   PRIMARY KEY (`user_sid`),
   KEY `school_id` (`school_id`),
   CONSTRAINT `employees_ibfk_1` FOREIGN KEY (`school_id`) REFERENCES `school` (`school_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100002 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=100002;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +96,7 @@ CREATE TABLE `school` (
   `school_type` enum('Mateřská škola','Základní škola','Střední škola','Vysoká škola') DEFAULT NULL,
   `school_adress` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`school_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,7 +135,7 @@ CREATE TABLE `students` (
   KEY `school_id` (`school_id`),
   CONSTRAINT `students_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `class` (`class_id`),
   CONSTRAINT `students_ibfk_2` FOREIGN KEY (`school_id`) REFERENCES `school` (`school_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
