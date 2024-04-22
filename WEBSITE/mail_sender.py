@@ -1,3 +1,6 @@
+import os
+import sys
+sys.path.insert(0,os.path.join(os.path.dirname(__file__),".."))
 from flask_mail import Message
 from flask_mail import Mail
 from LOG.logging import setup_logger

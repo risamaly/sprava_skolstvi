@@ -1,4 +1,7 @@
 import unittest
+import os
+import sys
+sys.path.insert(0,os.path.join(os.path.dirname(__file__),".."))
 from unittest.mock import patch
 from flask import Flask, session, template_rendered
 from contextlib import contextmanager
@@ -192,3 +195,6 @@ class AuthenticationRoutesTestCase(unittest.TestCase):
             response = c.post('/logout', follow_redirects=True)
             self.assertIsNone(session.get('user_info'))
             self.assertTrue('/login' in response.headers['Location'])
+
+if __name__ == '__main__':
+    unittest.main()

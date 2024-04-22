@@ -1,3 +1,6 @@
+import os
+import sys
+sys.path.insert(0,os.path.join(os.path.dirname(__file__),".."))
 from flask import Flask
 from DATABASE.database_config import Database_Config
 from flask_mysqldb import MySQL

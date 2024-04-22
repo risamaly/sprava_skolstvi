@@ -1,3 +1,6 @@
+import os
+import sys
+sys.path.insert(0,os.path.join(os.path.dirname(__file__),".."))
 from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app
 import re
 from flask import jsonify

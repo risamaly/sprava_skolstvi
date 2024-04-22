@@ -1,7 +1,10 @@
 import unittest
+import os
+import sys
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))  
 from unittest.mock import patch
 from flask import url_for
-from WEBSITE.__init__ import create_flask_app  
+from WEBSITE import create_flask_app
 
 class AdminRoutesTestCase(unittest.TestCase):
     """
@@ -10,17 +13,17 @@ class AdminRoutesTestCase(unittest.TestCase):
     """
     def setUp(self):
         """Inicializuje testovací klienta a nastavuje kontext aplikace."""
-        self.app = create_flask_app(test_config=True)  
+        self.app = create_flask_app()  
         self.client = self.app.test_client()
         self.app_context = self.app.app_context()
         self.app_context.push()
 
     def tearDown(self):
-        """Uklízí kontext aplikace po každém testu."""
+        """Vymaze kontext aplikace po každém testu."""
         self.app_context.pop()
 
     def test_add_user_empty_fields(self):
-        """aaaaa"""
+        """Testuje, zda se správně zobrazí chybové zprávy při prázdných polích."""
         response = self.client.post('/admin/utilities/add_user', data={
             'user_first_name': '',
             'user_last_name': '',
@@ -31,8 +34,99 @@ class AdminRoutesTestCase(unittest.TestCase):
             'user_password': '',
             'confirm_password': ''
         })
-        self.assertIn('field is required', response.get_data(as_text=True))
+        error_messages = [
+            'Jméno musí obsahovat pouze písmena a mezery.',
+            'Příjmení musí obsahovat pouze písmena a mezery.',
+            'Email není ve správném formátu.',
+            'BCN musí být deseticiferné číslo.',
+            'SID musí být pěticiferné číslo.',
+            'Heslo je krátké.'
+        ]
+        data = response.get_data(as_text=True)
+        for message in error_messages:
+            self.assertIn(message, data)
         self.assertEqual(response.status_code, 200)
+
+    def test_add_user_invalid_email(self):
+        """Testuje správnou chybovou zprávu při špatném emailovém formátu."""
+        response = self.client.post('/admin/utilities/add_user', data={
+            'user_first_name': 'John',
+            'user_last_name': 'Doe',
+            'user_email': 'bademail',
+            'user_role': 'admin',
+            'BCN': '1234567890',
+            'user_sid': '12345',
+            'user_password': 'Password1!',
+            'confirm_password': 'Password1!'
+        })
+        self.assertIn('Email není ve správném formátu.', response.get_data(as_text=True))
+        self.assertEqual(response.status_code, 200)
+
+    def test_add_user_weak_password(self):
+        """Testuje chybovou zprávu při zadání slabého hesla."""
+        response = self.client.post('/admin/utilities/add_user', data={
+            'user_first_name': 'Jane',
+            'user_last_name': 'Doe',
+            'user_email': 'jane@example.com',
+            'user_role': 'admin',
+            'BCN': '1234567890',
+            'user_sid': '12345',
+            'user_password': 'weak',
+            'confirm_password': 'weak'
+        })
+        self.assertIn('Heslo je krátké.', response.get_data(as_text=True))
+        self.assertEqual(response.status_code, 200)
+
+    def test_add_user_passwords_do_not_match(self):
+        """Testuje chybovou zprávu při neshodě zadaných hesel."""
+        response = self.client.post('/admin/utilities/add_user', data={
+            'user_first_name': 'John',
+            'user_last_name': 'Smith',
+            'user_email': 'john@example.com',
+            'user_role': 'admin',
+            'BCN': '1234567890',
+            'user_sid': '54321',
+            'user_password': 'Password1!',
+            'confirm_password': 'Password2!'
+        })
+        self.assertIn('Hesla se neshodují.', response.get_data(as_text=True))
+        self.assertEqual(response.status_code, 200)
+
+
+if __name__ == '__main__':
+    unittest.main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     def test_add_user_invalid_email(self):
         """aaaaa"""
@@ -256,7 +350,3 @@ class AdminRoutesTestCase(unittest.TestCase):
             response = self.client.delete(url_for('admin_routes.delete_user', user_sid=123), json={'reason': 'No longer employed'})
             self.assertEqual(response.status_code, 500)
             mock_logger.error.assert_called_once()
-
-
-if __name__ == '__main__':
-    unittest.main()

@@ -1,3 +1,6 @@
+import os
+import sys
+sys.path.insert(0,os.path.join(os.path.dirname(__file__),".."))
 import mysql.connector
 from mysql.connector import Error
 from LOG.logging import setup_logger

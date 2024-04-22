@@ -1,5 +1,8 @@
-import logging
 import os
+import sys
+sys.path.insert(0,os.path.join(os.path.dirname(__file__),".."))
+import logging
+
 
 def setup_logger(name, log_file='log.log', level=logging.INFO, log_directory='LOG'):
     """Vytvoreni loggeru, ve stanovenem formatu"""
